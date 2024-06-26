@@ -4,14 +4,9 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "react-native-paper"
 import { logIn, signUp } from "../service/auth";
 
-
-
-
-
 export default function Page() {
   const [email, setEmail] = React.useState("")
   const [pass, setPass] = React.useState("")
-
 
   return (
     <View style={styles.container}>
@@ -36,13 +31,11 @@ export default function Page() {
             } else {
               console.log("no se ha podido iniciar session")
             }
-            
           }}
           mode="contained"
         >
           <Text>Enviar</Text>
         </Button>
-
         <Button
           onPress={() => {
             router.navigate("pages/Register")
@@ -53,7 +46,6 @@ export default function Page() {
         </Button>
       </View>
     </View>
-    
   );
 }
 

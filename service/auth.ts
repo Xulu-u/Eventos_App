@@ -24,14 +24,12 @@ export const signUp  = async (
                 uid: res.user.uid,
             }).then(res => console.log(res))
         }
+        return true;
         console.log(res)
     } catch (error) {
         console.log(error)
-        return;
+        return false;
     }
-
-    
-        
 }
 
 export const logIn  = async (email:string, password:string) => {
@@ -48,7 +46,4 @@ export const logIn  = async (email:string, password:string) => {
         console.log(error)
         return false
     }
-    
-        
-        
 }

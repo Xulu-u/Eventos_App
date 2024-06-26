@@ -2,7 +2,7 @@ import React from "react"
 import { View, TextInput, StyleSheet, Text} from "react-native"
 import { Button } from "react-native-paper"
 import { router } from "expo-router"
-import { signUp } from "../../service/auth"
+import {signUp, logIn} from '../../service/auth';
 
 const Register = () => {
   const [email, setEmail] = React.useState('')
@@ -45,14 +45,25 @@ const Register = () => {
         />
 
         <Button
-          onPress={() => {
-            signUp(name,lastName,email,pass)
+          onPress={ async () => {
+            const singUp = await signUp(name,lastName,email,pass)
+            
+            if(singUp) {
+              const singIn = await logIn(email, pass)
+
+              if (singIn) {
+                router.navigate("pages/Home")
+              } else {
+                console.log("no se ha podido iniciar session")
+              }
+            } else {
+              console.log("no se ha podido registrar")
+            }
           }}
           mode="contained-tonal"
         >
           <Text>Registrar</Text>
         </Button>
-
         <Button
           onPress={() => {
             router.back()
@@ -61,8 +72,7 @@ const Register = () => {
         >
           <Text>Acceder</Text>
         </Button>
-
-       </View>
+      </View>
     </View>
   )
 }
