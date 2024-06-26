@@ -18,7 +18,7 @@ const Event = () => {
         <Button
           onPress={() => {
             logout();
-            router.navigate("index");
+            router.navigate("/");
           }}
           mode="contained"
         >
