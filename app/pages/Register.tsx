@@ -2,7 +2,7 @@ import React from "react"
 import { View, TextInput, StyleSheet, Text} from "react-native"
 import { Button } from "react-native-paper"
 import { router } from "expo-router"
-import {signUp, logIn} from '../../service/auth';
+import {signUp, logIn} from '../services/auth';
 
 const Register = () => {
   const [email, setEmail] = React.useState('')
@@ -10,18 +10,17 @@ const Register = () => {
   const [name, setName] = React.useState('')
   const [lastName, setLastName] = React.useState('')
 
-
   return (
     <View style={styles.container}>
-       <View style={styles.main}>
-        <Text style={styles.subtitle}>Registrar</Text>
+      <View style={styles.main}>
+        <Text style={styles.subtitle}>Register</Text>
         <TextInput 
             style={ styles.input}
             placeholder="nombre"
             onChangeText={setName}
             value={name}
         />
-         <TextInput 
+        <TextInput 
             style={ styles.input}
             placeholder="apellido"
             onChangeText={setLastName}
@@ -39,11 +38,10 @@ const Register = () => {
             onChangeText={setPass}
             value={pass}
         />
-         <TextInput 
+        <TextInput 
             style={ styles.input}
             placeholder="repite la contraseña"
         />
-
         <Button
           onPress={ async () => {
             const singUp = await signUp(name,lastName,email,pass)
@@ -52,7 +50,7 @@ const Register = () => {
               const singIn = await logIn(email, pass)
 
               if (singIn) {
-                router.navigate("pages/Home")
+                router.navigate("Page")
               } else {
                 console.log("no se ha podido iniciar session")
               }
@@ -62,7 +60,7 @@ const Register = () => {
           }}
           mode="contained-tonal"
         >
-          <Text>Registrar</Text>
+          <Text>Register</Text>
         </Button>
         <Button
           onPress={() => {
@@ -70,7 +68,7 @@ const Register = () => {
           }}
           mode="contained"
         >
-          <Text>Acceder</Text>
+          <Text>Back to Log In</Text>
         </Button>
       </View>
     </View>
@@ -80,35 +78,35 @@ const Register = () => {
 export default Register
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    main: {
-      flex: 1,
-      justifyContent: "center",
-      maxWidth: 960,
-      marginHorizontal: "auto",
-    },
-    title: {
-      fontSize: 64,
-      fontWeight: "bold",
-    },
-    subtitle: {
-      fontSize: 36,
-      color: "#38434D",
-      textAlign: "center"
-    },
-    input: {
-      width: 320,
-      borderWidth: 1,
-      borderColor: "black",
-      marginBottom: 10,
-      fontSize: 18,
-      borderRadius: 5,
-      paddingHorizontal: 5,
-      paddingVertical:3,
-    }
-  });
+  container: {
+    flex: 1,
+  },
+  main: {
+    flex: 1,
+    justifyContent: "center",
+    maxWidth: 960,
+    marginHorizontal: "auto",
+  },
+  title: {
+    fontSize: 64,
+    fontWeight: "bold",
+  },
+  subtitle: {
+    fontSize: 36,
+    color: "#38434D",
+    textAlign: "center"
+  },
+  input: {
+    width: 320,
+    borderWidth: 1,
+    borderColor: "black",
+    marginBottom: 10,
+    fontSize: 18,
+    borderRadius: 5,
+    paddingHorizontal: 5,
+    paddingVertical:3,
+  }
+});
 
 
 

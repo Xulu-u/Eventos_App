@@ -1,14 +1,7 @@
 import { collection, addDoc, db } from "../api/firebase"
-
+import { userData } from "../common/types/User"
 
 const collectionName = "Users"
-
-interface userData {
-    name: string;
-    lastName: string;
-    email: string | null;
-    uid: string | null;  
-}
 
 export const createUser = async (obj:userData) => {
     const colRef = await collection(db, collectionName)

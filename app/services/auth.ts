@@ -1,5 +1,6 @@
-import { firebaseApp, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "../api/firebase";
-import { createUser } from "./registre";
+import { signOut } from "firebase/auth";
+import { firebaseApp, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, auth } from "../api/firebase";
+import { createUser } from "./register";
 
 export const signUp  = async (
     name: string,
@@ -7,9 +8,8 @@ export const signUp  = async (
     email:string, 
     password:string,
 ) => {
-    
-
     const auth = getAuth(firebaseApp);
+    
     try {
         const res = await createUserWithEmailAndPassword(
             auth,
@@ -47,3 +47,5 @@ export const logIn  = async (email:string, password:string) => {
         return false
     }
 }
+
+export const logout = async () => await signOut(auth);

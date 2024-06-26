@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, router } from "expo-router";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "react-native-paper"
-import { logIn, signUp } from "../service/auth";
+import { logIn, signUp } from "./services/auth";
+import { useEventUserContext } from "./providers/UserProvider";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from './api/firebase';
+import { userData } from "./common/types/User";
 
 export default function Page() {
   const [email, setEmail] = React.useState("")
   const [pass, setPass] = React.useState("")
 
+  const {eventUser, setEventUser} = useEventUserContext();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        console.log('user', user, ' userId:', user.uid, "User logged");
+        setEventUser({name: user.displayName, uid: user.uid, email: user.email} as userData)
+        router.push("pages/Home")
+      } else {
+        console.log("No user logged");
+        setEventUser(undefined)
+      }
+    })
+  },[] )
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Accede</Text>
+        <Text style={styles.title}>Events_App</Text>
         <TextInput
           style={styles.input}
           onChangeText={setEmail}
@@ -34,7 +52,7 @@ export default function Page() {
           }}
           mode="contained"
         >
-          <Text>Enviar</Text>
+          <Text>Log In</Text>
         </Button>
         <Button
           onPress={() => {
@@ -42,7 +60,7 @@ export default function Page() {
           }}
           mode="contained-tonal"
         >
-          <Text>Registrar</Text>
+          <Text>Register</Text>
         </Button>
       </View>
     </View>

@@ -11,21 +11,16 @@ const Tab = createBottomTabNavigator()
 
 const Home = () => {
   return (
-    
-
-    
-      <NavigationContainer
-        independent={true}
+    <NavigationContainer
+      independent={true}
+    >
+      <Tab.Navigator
       >
-        <Tab.Navigator
-        >
-          <Tab.Screen name="Lista de Eventos" component={Event}/>
-          <Tab.Screen name="Invitaciones" component={Join}/>
-        </Tab.Navigator>
-        
-      </NavigationContainer>
-
-    
+        <Tab.Screen name="Events List" component={Event}/>
+        <Tab.Screen name="Invitations" component={Join}/>
+      </Tab.Navigator>
+      
+    </NavigationContainer>
   )
 }
 

@@ -1,7 +1,7 @@
 import React from "react"
 import { useEffect } from "react"
 import { View, Text, FlatList } from "react-native"
-import { getUser } from "../../service/getUser"
+import { getUser } from "../services/getUser"
 
 
 
@@ -14,13 +14,13 @@ const Join = () => {
 
   return (
     <View>
-        <FlatList 
-          data={joined}
-          renderItem={({item}) => <View>
-            <Text>{item.name}</Text>
-          </View>}
-          keyExtractor={(item) => item.id}
-        />
+      <FlatList 
+        data={joined}
+        renderItem={({item}) => <View>
+          <Text>{item.name}</Text>
+        </View>}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   )
 }

@@ -1,22 +1,34 @@
 import React from 'react'
 import { View, Text, Pressable, StyleSheet } from 'react-native'
-import { FAB } from "react-native-paper"
+import {FAB, Button} from 'react-native-paper';
+import {useEventUserContext} from '../providers/UserProvider';
+import {router} from 'expo-router';
+import { logout } from '../services/auth';
 
 const Event = () => {
+    const {eventUser, setEventUser} = useEventUserContext();
   return (
     <View style={{flex:1}}>
-        <Text>Una lista de eventos</Text>
+        <Text>User Logged: {eventUser?.email}</Text>
+
         <FAB
             style={styles.addEventButton}
             label='add'
         />
-        
+        <Button
+          onPress={() => {
+            logout();
+            router.navigate("index");
+          }}
+          mode="contained"
+        >
+            <Text>Log Out</Text>
+        </Button>
     </View>
   )
 }
 
 export default Event
-
 
 const styles = StyleSheet.create({
     addEventButton : {
