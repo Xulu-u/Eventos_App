@@ -1,10 +1,26 @@
-import { View, Text } from "react-native"
+import React from "react"
+import { useEffect } from "react"
+import { View, Text, FlatList } from "react-native"
+import { getUser } from "../../service/getUser"
+
 
 
 const Join = () => {
+  const [joined, setJoined] = React.useState<any[]>([])
+
+  React.useEffect(() => {
+    getUser().then(setJoined)
+  },[])
+
   return (
     <View>
-        <Text>Hola Mundo</Text>
+        <FlatList 
+          data={joined}
+          renderItem={({item}) => <View>
+            <Text>{item.name}</Text>
+          </View>}
+          keyExtractor={(item) => item.id}
+        />
     </View>
   )
 }

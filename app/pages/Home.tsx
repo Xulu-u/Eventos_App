@@ -17,7 +17,8 @@ const Home = () => {
       <NavigationContainer
         independent={true}
       >
-        <Tab.Navigator>
+        <Tab.Navigator
+        >
           <Tab.Screen name="Lista de Eventos" component={Event}/>
           <Tab.Screen name="Invitaciones" component={Join}/>
         </Tab.Navigator>
